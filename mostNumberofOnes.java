@@ -24,6 +24,46 @@ returns 3,5 since row 1 has the max number of 1s
 
 class Solution {
 
+  public static void betterSolution(int[][] input)
+  {
+    int rowsize = input.length;
+    int colsize = input[0].length;
+    int row=0, col=colsize-1;
+    int max=0, rowno=0;
+    while(row<rowsize && row>=0 && col<colsize && col>=0)
+    {
+      if(input[row][col]==1)
+      {
+        col--;
+        if(col==-1)
+        {
+        if(max<(colsize-col-1))
+        {
+          max=(colsize-col-1);
+          rowno=row;
+        }
+        }
+      }
+      else if(input[row][col]==0)
+      {
+        if(max<(colsize-col-1))
+        {
+          max=(colsize-col-1);
+          rowno=row;
+        }
+        row++;
+      }
+    }
+    if(max==0)
+    {
+      System.out.println("-1, 0");
+    }
+    else
+    {
+      System.out.println(rowno+", "+max);
+    }
+  }
+  
 public static int BinarySearch(int left, int right, int[] search)
 {
   if(left==right)
@@ -78,46 +118,6 @@ public static int BinarySearch(int left, int right, int[] search)
   }
   return (rowno+", "+max);
 }
-
-  public static void betterSolution(int[][] input)
-  {
-    int rowsize = input.length;
-    int colsize = input[0].length;
-    int row=0, col=colsize-1;
-    int max=0, rowno=0;
-    while(row<rowsize && row>=0 && col<colsize && col>=0)
-    {
-      if(input[row][col]==1)
-      {
-        col--;
-        if(col==-1)
-        {
-        if(max<(colsize-col-1))
-        {
-          max=(colsize-col-1);
-          rowno=row;
-        }
-        }
-      }
-      else if(input[row][col]==0)
-      {
-        if(max<(colsize-col-1))
-        {
-          max=(colsize-col-1);
-          rowno=row;
-        }
-        row++;
-      }
-    }
-    if(max==0)
-    {
-      System.out.println("-1, 0");
-    }
-    else
-    {
-      System.out.println(rowno+", "+max);
-    }
-  }
   
   public static void main(String[] args) {
     int[][] input = {{0, 0, 1}, {0, 1, 1}, {0, 0, 0}};
